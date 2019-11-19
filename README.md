@@ -23,7 +23,8 @@ You can run an interactive web-based application from the checked out repository
 (venv) $ gunicorn se9:server
 ```
 
-... and visit [http://localhost:8000]
+... and visit [http://localhost:8000](http://localhost:8000)
+... and play with the Swagger UI ;-)
 
 > Pro-Tip: there is also a top-level `Makefile`, allowing for a simple `make` command, generating and loading the environment all-in-one-go for you.
 

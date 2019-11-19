@@ -1,0 +1,9 @@
+{
+  "name": "se9",
+  "description": "A proof-of-concept.",
+  "website": "https://github.com/christophevg/se9",
+  "addons" : [
+    "mongolab"
+  ],
+  "success_url": "/"
+}

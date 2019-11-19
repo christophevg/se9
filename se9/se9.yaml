@@ -1,0 +1,191 @@
+swagger: '2.0'
+info:
+  description: This is a product search API
+  version: 1.0.0
+  title: Simple Product Search API
+  # put the contact info for your development or API team
+  contact:
+    email: contact@christophe.vg
+
+  license:
+    name: BSD-3
+    url: https://opensource.org/licenses/BSD-3-Clause
+
+# tags are used for organizing operations
+tags:
+- name: public
+  description: Operations available to all
+
+paths:
+  /products:
+    get:
+      tags:
+      - public
+      summary: searches for products
+      description: |
+        By passing in the appropriate options, you can search for available products
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: paxCount
+        description: provide an optional number of passengers
+        required: false
+        type: integer
+      - in: query
+        name: paxAges
+        description: provide an optional list of ages of passengers (comma separated)
+        required: false
+        type: array
+        collectionFormat: csv
+        items:
+            type: integer
+      - in: query
+        name: destination
+        description: provide an optional destination
+        required: false
+        type: string
+      - in: query
+        name: arrivalDate
+        description: provide an arrival date
+        required: true
+        type: string
+        format: date
+      - in: query
+        name: duration
+        description: provide a duration
+        required: true
+        type: integer
+      - in: query
+        name: productCategory
+        description: provide an optional product category
+        required: false
+        type: string
+        enum: [overland]
+      - in: query
+        name: productType
+        description: provide an optional product type (must be used together with `productCategory`.)
+        required: false
+        type: string
+        enum: [overland]
+      - in: query
+        name: brand
+        description: provide an optional brand
+        required: false
+        type: string
+        enum: [ tui, vtb, kras, vip, tuifly ]
+      - in: query
+        name: name
+        description: provide an optional name for a product, component or unit
+        required: false
+        type: string
+      - in: query
+        name: reviewScore
+        description: provide an optional lower limit for a review score
+        required: false
+        type: integer
+      - in: query
+        name: starRating
+        description: provide an optional lower limit for a star rating
+        required: false
+        type: integer
+      - in: query
+        name: board
+        description: provide an optional required board
+        required: false
+        type: string
+        enum: [ stay, breakfast, halfBoard, allInclusive ]
+      - in: query
+        name: budget
+        description: provide an optional upper budget
+        required: false
+        type: integer
+      - in: query
+        name: accomodationType
+        description: provide an optional acommodation type
+        required: false
+        type: string
+        enum: [ hotel, appartment, villa, bungalowpark, camping, cruise ]
+      - in: query
+        name: accommodationFacilities
+        description: provide an optional list of required facilities
+        required: false
+        type: array
+        collectionFormat: csv
+        items:
+          type: string
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        400:
+          description: bad input parameter
+definitions:
+  Product:
+    type: object
+    required:
+    - productGUID
+    - price
+    properties:
+      productGUID:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      productName:
+        type: string
+        example: Skitrip to Winterberg
+      productCategory:
+        type: string
+        enum: [overland]
+        example: overland
+      productType:
+        type: string
+        enum: [overland]
+        example: overland
+      destination:
+        type: array
+        items:
+          type: string
+        example: [Europe, Germany, Winterberg]
+      brand:
+         type: string
+         enum: [ tui, vtb, kras, vip, tuifly ]
+         example: tui
+      accommodationType:
+        type: string
+        enum: [ hotel, appartment, villa, bungalowpark, camping, cruise ]
+        example: hotel
+      componentGUID:
+        type: string
+        format: uuid
+        example: f29051ee-8c53-5c02-00e6-e70a748f08cb
+      componentName:
+        type: string
+        example: Landhotel Fernsicht
+      unitId:
+        type: string
+        example: 123
+      unitName:
+        type: string
+        example: Family Room
+      reviewScore:
+        type: integer
+        example: 4
+      starRating:
+        type: integer
+        example: 3
+      board:
+        type: string
+        enum: [ stay, breakfast, halfBoard, allInclusive ]
+        example: allInclusive
+      price:
+        type: number
+        example: 199.99
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /christophe.vg/search/1.0.0
+schemes:
+ - https

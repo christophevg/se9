@@ -184,8 +184,4 @@ definitions:
       price:
         type: number
         example: 199.99
-# Added by API Auto Mocking Plugin
-host: virtserver.swaggerhub.com
-basePath: /christophe.vg/search/1.0.0
-schemes:
- - https
+basePath: /

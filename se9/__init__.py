@@ -20,7 +20,7 @@ db       = mongo[database]
 app      = connexion.FlaskApp(__name__)
 server   = app.app
 
-app.add_api("se9.yaml", resolver=RestyResolver("se9"), base_path='/')
+app.add_api("se9.yaml", resolver=RestyResolver("se9"))
 
 def render(template, **kwargs):
   try:
